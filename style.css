@@ -1,0 +1,45 @@
+body {
+  margin: 0px;
+  overflow: hidden;
+}
+
+path{
+  fill: none;
+  opacity: 0.5;
+  stroke-width: 2;
+}
+
+text {
+  font-family: sans-serif;
+}
+
+.tick text {
+  font-size: 2em;
+  fill: #635F5D;
+  cursor: pointer;
+}
+
+.axis-label {
+  font-size: 2.0em;
+  fill: #8E8883;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 2.5em;
+  fill: #635F5D;
+}
+
+.y-select{
+  font-size: 1.4em;
+}
+
+.Durchgefallen_color {
+  font-size: 1.5em;
+  fill: #c44d56;
+}
+
+.Bestanden_color {
+  font-size: 1.5em;
+  fill: #00b16a;
+}
