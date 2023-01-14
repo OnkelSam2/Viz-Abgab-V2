@@ -124,26 +124,26 @@
       .text(title);
 
     g.append('text')
-      .attr('class', 'Bestanden_color')
+      .attr('class', 'Durchgefallen_color')
       .attr('y', 447)
       .attr('x', 0)
       .text('Durchgefallen')
 
     g.append('text')
-      .attr('class', 'Durchgefallen_color')
+      .attr('class', 'Bestanden_color')
       .attr('y', 447)
       .attr('x', 200)
       .text('Bestanden')
 
     g.append('rect')
-      .attr('class', 'Bestanden_color')
+      .attr('class', 'Durchgefallen_color')
       .attr('y', 430)
       .attr('x', 150)
       .attr('width', 40)
       .attr('height', 22)
 
     g.append('rect')
-      .attr('class', 'Durchgefallen_color')
+      .attr('class', 'Bestanden_color')
       .attr('y', 430)
       .attr('x', 317)
       .attr('width', 40)
