@@ -97,7 +97,6 @@
     const transition = g =>
       g.transition().duration(300);
 
-
     const dragend = d => {
       delete draging[d];
       transition(pathG).attr("d", path);
@@ -110,9 +109,6 @@
       .on('drag', drag)
       .on('end', dragend)
     );
-    
-   
-   
 
     yAxisG.append('text')
       .attr('class', 'axis-label')
@@ -139,7 +135,6 @@
       .attr('x', 200)
       .text('Bestanden')
 
-
     g.append('rect')
       .attr('class', 'Bestanden_color')
       .attr('y', 430)
@@ -154,18 +149,12 @@
       .attr('width', 40)
       .attr('height', 22)
 
-
-
   };
-
   d3$1.csv("https://gist.githubusercontent.com/OnkelSam2/e1f493bfaa541989736f2d1b84fcfa0d/raw/ExamData.csv")
     .then(data => {
       data.forEach(d => {
       });
-
       render(data);
-
     });
-
 }(d3));
 
