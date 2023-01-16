@@ -16,6 +16,7 @@
   const render = data => {
     const title = 'Exame Data';
 
+
     const margin = { top: 120, right: 50, bottom: 100, left: 270 };
     const innerHeight = height - margin.top - margin.bottom;
     const innerWidth = width - margin.right - margin.left;
@@ -35,57 +36,59 @@
         .domain(d3$1.extent(data, d => d[name]))
         .range([innerHeight, 0])
         .nice();
-        if(name == "Nachklausur"){
-          yAxis[name] = d3$1.axisLeft(y[name])
-        .ticks(1).tickFormat(function(d) {
-          if(d === 1){return "Ja"}else{return "Nein"}
-        })}else if(name == "Year"){
-          yAxis[name] = d3$1.axisLeft(y[name]).ticks(4).tickFormat(function(d) {
-            return d;
-          });
-        }else if(name == "Course"){
-          yAxis[name] = d3$1.axisLeft(y[name]).ticks(1).tickFormat(function(d) {
-            if(d === 1){return "Va"}else{return "Vis"}
-          });
-        }else if(name == "Grade"){
-          yAxis[name] = d3$1.axisLeft(y[name]).ticks(5).tickFormat(function(d) {
-           return d;
-          });
-        }else if(name == "AttemptNumber"){
-          yAxis[name] = d3$1.axisLeft(y[name]).ticks(2).tickFormat(function(d) {
-            return d;
-          });
-        }else if(name == "Bachelor/Master"){
-          yAxis[name] = d3$1.axisLeft(y[name]).ticks(1).tickFormat(function(d) {
-            if(d === 0){return "Bachelor"}else{return "Master"}
-          });
-        }else if(name == "Study"){
-          yAxis[name] = d3$1.axisLeft(y[name]).ticks(1).tickFormat(function(d) {
-            if(d === 0){return "Mathe"}else{return "Winfo"}
-          });
-        }else{
-          yAxis[name] = d3$1.axisLeft(y[name])
-        .tickPadding(10);
-        }
+      if (name == "Nachklausur") {
+        yAxis[name] = d3$1.axisLeft(y[name])
+          .ticks(1).tickFormat(function (d) {
+            if (d === 1) { return "Ja" } else { return "Nein" }
+          })
+      } else if (name == "Year") {
+        yAxis[name] = d3$1.axisLeft(y[name]).ticks(4).tickFormat(function (d) {
+          return d;
+        });
+      } else if (name == "Course") {
+        yAxis[name] = d3$1.axisLeft(y[name]).ticks(1).tickFormat(function (d) {
+          if (d === 1) { return "Va" } else { return "Vis" }
+        });
+      } else if (name == "Grade") {
+        yAxis[name] = d3$1.axisLeft(y[name]).ticks(5).tickFormat(function (d) {
+          return d;
+        });
+      } else if (name == "AttemptNumber") {
+        yAxis[name] = d3$1.axisLeft(y[name]).ticks(2).tickFormat(function (d) {
+          return d;
+        });
+      } else if (name == "Bachelor/Master") {
+        yAxis[name] = d3$1.axisLeft(y[name]).ticks(1).tickFormat(function (d) {
+          if (d === 0) { return "Bachelor" } else { return "Master" }
+        });
+      } else if (name == "Study") {
+        yAxis[name] = d3$1.axisLeft(y[name]).ticks(1).tickFormat(function (d) {
+          if (d === 0) { return "Mathe" } else { return "Winfo" }
+        });
+      } else {
+        yAxis[name] = d3$1.axisLeft(y[name])
+          .tickPadding(10);
+      }
     }
 
     var draging = {};
     const Position = d =>
       draging[d] == null ? x(d) : draging[d];
 
-    const path = d => 
-        d3$1.line().curve(d3.curveBundle.beta(0.92))(column.map(p => [Position(p), y[p](d[p])]));
+    const path = d =>
+     d3$1.line().curve(d3.curveCardinal)(column.map(p => [Position(p), y[p](d[p])]));
 
     const pathG = g.selectAll('path').data(data).enter()
       .append('path')
       .attr('d', path)
-      .attr('stroke', d => { return color(d.class); });
+      .attr('stroke', d => { return color(d.class)})
+      
 
     const yAxisG = g.selectAll('.domain').data(column).enter()
       .append('g')
       .each(function (d) { d3$1.select(this).call(yAxis[d]); })
       .attr('transform', d => 'translate(' + x(d) + ',0)')
-    
+
     const drag = (d) => {
       draging[d] = Math.min(innerWidth + 30, Math.max(-30, d3.event.x));
       pathG.attr('d', path);
